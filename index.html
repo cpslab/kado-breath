@@ -30,8 +30,7 @@
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> webgl - buffergeometry - uint</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-
+		<script src="/socket.io/socket.io.js"></script>
 
 		<script src="https://threejs.org/examples/js/Detector.js"></script>
 		<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
@@ -184,6 +183,7 @@
 			requestAnimationFrame( animate );
 
       socket.on('state', function(msg){
+        console.log('>> ' + msg);
         // msg
         tv = msg;
       });
