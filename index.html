@@ -30,6 +30,7 @@
 		<div id="info"><a href="http://threejs.org" target="_blank">three.js</a> webgl - buffergeometry - uint</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
 
 		<script src="https://threejs.org/examples/js/Detector.js"></script>
@@ -40,6 +41,8 @@
 			var container, stats;
 			var camera, scene, renderer;
 			var mesh;
+			var t = 0;
+			var tv = 1;
 			init();
 			animate();
 			function init() {
@@ -170,12 +173,21 @@
 				stats.update();
 			}
 			function render() {
-				var time = Date.now() * 0.001;
+				var time = t * 0.01;
+        t += tv;
 				mesh.rotation.x = time * 0.25;
 				mesh.rotation.y = time * 0.5;
 				renderer.render( scene, camera );
-			}
-		</script>
+      }
+      var socket = io();
 
+			requestAnimationFrame( animate );
+
+      socket.on('state', function(msg){
+        // msg
+        tv = msg;
+      });
+
+		</script>
 	</body>
 </html>
